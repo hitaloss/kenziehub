@@ -32,6 +32,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "Inter",
+    color: "#FFFFFF",
   },
 });
 
