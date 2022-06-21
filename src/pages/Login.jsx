@@ -14,10 +14,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
 
-function Login({ setIsLogged }) {
+function Login({ isLogged, setIsLogged }) {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
@@ -46,6 +46,7 @@ function Login({ setIsLogged }) {
     const response = axios
       .post(`${baseUrl}/sessions`, data)
       .then((res) => {
+        localStorage.clear();
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("name", res.data.user.name);
         localStorage.setItem("course_module", res.data.user.course_module);
@@ -56,6 +57,7 @@ function Login({ setIsLogged }) {
       .catch((err) => toast.error("Email ou senha inválidos"));
     return response;
   };
+  if (isLogged) return setTimeout(() => <Redirect to="/dashboard" />, 3000);
 
   return (
     <>
@@ -93,38 +95,42 @@ function Login({ setIsLogged }) {
             <Typography color="#FFFFFF" variant="h6">
               Login
             </Typography>
+
             <TextField
               label="Email"
               placeholder="Digite aqui seu email"
               variant="outlined"
               color="white"
-              helperText={errors.email?.message ? errors.email.message : ""}
+              helperText={errors.email?.message}
+              error={errors.email !== undefined ? true : false}
               sx={{
                 backgroundColor: "secondary.main",
                 borderRadius: "5px",
                 width: "80%",
                 input: {
                   color: "#FFFFFF",
-                  "&hover:": "white",
-                  "&::placeholder": "white",
+                  "&hover:": { color: "#FFFFFF" },
+                  "&::placeholder": { color: "#FFFFFF" },
+                },
+                label: {
+                  color: "#FFFFFF !important",
                 },
               }}
               {...register("email")}
             />
             <TextField
-              width="80%"
               label="Senha"
               placeholder="Digite aqui sua senha"
               variant="outlined"
               type={showPassword ? "text" : "password"}
               color="white"
-              helperText={
-                errors.password?.message ? errors.password.message : ""
-              }
+              error={errors.password !== undefined ? true : false}
+              helperText={errors.password?.message}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
+                      color="white"
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                     >
@@ -144,8 +150,11 @@ function Login({ setIsLogged }) {
                 color: "white",
                 input: {
                   color: "#FFFFFF",
-                  "&hover:": "white",
-                  "&::placeholder": "white",
+                  "&hover:": { color: "#FFFFFF" },
+                  "&::placeholder": { color: "#FFFFFF" },
+                },
+                label: {
+                  color: "#FFFFFF !important",
                 },
               }}
               {...register("password")}
@@ -172,6 +181,7 @@ function Login({ setIsLogged }) {
               Ainda não possui uma conta?
             </Typography>
             <Button
+              onClick={() => setTimeout(() => history.push("/register"), 500)}
               sx={{
                 padding: ".6rem",
                 width: "80%",
