@@ -50,14 +50,15 @@ function Login({ isLogged, setIsLogged }) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("name", res.data.user.name);
         localStorage.setItem("course_module", res.data.user.course_module);
-        toast.success("Login bem sucedido! Redirecionando...");
+        localStorage.setItem("user_id", res.data.user.id);
+        toast.success("Login bem sucedido!");
         setIsLogged(true);
-        setTimeout(() => history.push("/dashboard"), 3000);
+        history.push("/dashboard");
       })
       .catch((err) => toast.error("Email ou senha inválidos"));
     return response;
   };
-  if (isLogged) return setTimeout(() => <Redirect to="/dashboard" />, 3000);
+  if (isLogged) return <Redirect to="/dashboard" />;
 
   return (
     <>
@@ -109,7 +110,7 @@ function Login({ isLogged, setIsLogged }) {
                 width: "80%",
                 input: {
                   color: "#FFFFFF",
-                  "&hover:": { color: "#FFFFFF" },
+                  "&:hover": { color: "#FFFFFF" },
                   "&::placeholder": { color: "#FFFFFF" },
                 },
                 label: {
@@ -150,7 +151,7 @@ function Login({ isLogged, setIsLogged }) {
                 color: "white",
                 input: {
                   color: "#FFFFFF",
-                  "&hover:": { color: "#FFFFFF" },
+                  "&:hover": { color: "#FFFFFF" },
                   "&::placeholder": { color: "#FFFFFF" },
                 },
                 label: {

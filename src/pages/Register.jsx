@@ -23,8 +23,6 @@ function Register({ isLogged, setIsLogged }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
-  isLogged && <Redirect to="/dashboard" />;
-
   const handleClickShowPasswordConfirm = () =>
     setShowPasswordConfirm(!showPasswordConfirm);
   const handleMouseDownPasswordConfirm = () =>
@@ -91,6 +89,11 @@ function Register({ isLogged, setIsLogged }) {
     toast.error(message);
     toast.clearWaitingQueue();
   };
+
+  if (isLogged)
+    return setTimeout(() => {
+      <Redirect to="/dashboard" />;
+    }, 3000);
 
   return (
     <>

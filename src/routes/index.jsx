@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
+import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
@@ -18,7 +19,9 @@ function Routes() {
       <Route path="/register">
         <Register isLogged={isLogged} />
       </Route>
-      <Route path="/dashboard"></Route>
+      <Route path="/dashboard">
+        <Dashboard isLogged={isLogged} setIsLogged={setIsLogged} />
+      </Route>
       <Route path=""></Route>
     </Switch>
   );
