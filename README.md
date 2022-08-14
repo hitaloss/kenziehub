@@ -9,6 +9,8 @@ e autenticação dos usuários através do consumo de uma API.
 
 Vá em frente! Faça o cadastro, logo após experimente fazer o login e até mesmo cadastrar suas tecnologias!
 
+### Link: https://react-entrega-s2-kenzie-hub-cazacazacaza.vercel.app/
+
 ### Bibliotecas usadas:
 
 ● YUP\
