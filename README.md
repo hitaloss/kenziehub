@@ -31,3 +31,12 @@ ou
 
 npm install
 ```
+#### Logo após, basta executar o comando para rodar a aplicação
+
+```
+yarn start
+
+ou
+
+npm start
+```
