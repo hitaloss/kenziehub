@@ -21,3 +21,13 @@ Vá em frente! Faça o cadastro, logo após experimente fazer o login e até mes
 ● React Toastify\
 ● Styled Components\
 ● Material UI
+
+#### Execute o comando para instalações de dependências da API:
+
+```
+yarn
+
+ou
+
+npm install
+```
